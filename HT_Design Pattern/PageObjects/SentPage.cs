@@ -37,11 +37,9 @@ namespace HT_Design_Pattern.PageObjects
 
         public void SendMails()
         {
-            //SentField.Click();
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentField));
             var SentButton = new Button(SentField);
             SentButton.Click();
-            //SentMail.Click();
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentMail));
             var SentMailButton = new Button(SentMail);
             SentMailButton.Click();
@@ -50,11 +48,9 @@ namespace HT_Design_Pattern.PageObjects
 
         public void LogOut()
         {
-            //AccountField.Click();
             var AccountButton = new Button(AccountField);
             AccountButton.Click();
             WebDriver.GetInstance().SwitchTo().Frame("account");
-            //SignOut.Click();
             var SignOutButton = new Button(SignOut);
             SignOutButton.Click();
             WebDriver.GetInstance().SwitchTo().ParentFrame().Dispose();
