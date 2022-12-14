@@ -23,13 +23,14 @@ namespace HT_Design_Pattern.PageObjects
         }
 
         public IWebElement UsernameField => WebDriver.GetInstance().FindElement(By.Id("identifierId"));
-
-        public IWebElement NextButton => WebDriver.GetInstance().FindElement(By.Id("identifierNext"));
+        public Button UsernameButton = new Button(WebDriver.GetInstance().FindElement(By.Id("identifierNext")));
+        public Button PasswordButton = new Button(WebDriver.GetInstance().FindElement(By.Id("passwordNext")));
+        //public IWebElement NextButton => WebDriver.GetInstance().FindElement(By.Id("identifierNext"));
         public IWebElement PasswordField => WebDriver.GetInstance().FindElement(By.XPath("//*[@id='password']//input"));
 
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(50));
         
-        public IWebElement LoginButton => WebDriver.GetInstance().FindElement(By.Id("passwordNext"));
+        //public IWebElement LoginButton => WebDriver.GetInstance().FindElement(By.Id("passwordNext"));
 
         public IWebElement MainPage => WebDriver.GetInstance().FindElement(By.CssSelector("body"));
 
@@ -39,12 +40,13 @@ namespace HT_Design_Pattern.PageObjects
             //passing the value from test
             UsernameField.SendKeys(username); 
             
-            var UsernameButton = new Button(NextButton);
+            //var UsernameButton = new Button(NextButton);
             UsernameButton.Click();
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(PasswordField));
             //pass this value from test
             PasswordField.SendKeys(password); 
-            var PasswordButton = new Button(LoginButton);
+
+            //var PasswordButton = new Button(LoginButton);
             PasswordButton.Click();
 
         }

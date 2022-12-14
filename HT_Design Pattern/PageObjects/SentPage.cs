@@ -23,22 +23,23 @@ namespace HT_Design_Pattern.PageObjects
         {
         }
 
-        public IWebElement SentField => WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Sent')]"));
+        //public IWebElement SentField => WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Sent')]"));
+        public Button SentButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Sent')]")));
 
         public IWebElement SentMail => WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"));
 
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(50));
 
-
-        public IWebElement AccountField => WebDriver.GetInstance().FindElement(By.XPath("//img[@class='gb_Ia gbii']"));
+        public Button AccountButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//img[@class='gb_Ia gbii']")));
+        //public IWebElement AccountField => WebDriver.GetInstance().FindElement(By.XPath("//img[@class='gb_Ia gbii']"));
 
         public IWebElement SignOut => WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Sign out']"));
 
 
         public void SendMails()
         {
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentField));
-            var SentButton = new Button(SentField);
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentField));
+            //var SentButton = new Button(SentField);
             SentButton.Click();
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentMail));
             var SentMailButton = new Button(SentMail);
@@ -48,7 +49,7 @@ namespace HT_Design_Pattern.PageObjects
 
         public void LogOut()
         {
-            var AccountButton = new Button(AccountField);
+            //var AccountButton = new Button(AccountField);
             AccountButton.Click();
             WebDriver.GetInstance().SwitchTo().Frame("account");
             var SignOutButton = new Button(SignOut);

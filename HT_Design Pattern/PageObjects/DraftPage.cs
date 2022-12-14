@@ -22,29 +22,32 @@ namespace HT_Design_Pattern.PageObjects
         {
         }
 
-        public IWebElement DraftField => WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Drafts')]"));
-
-        public IWebElement DraftMail => WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"));
+       // public IWebElement DraftField => WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Drafts')]"));
+        public Button Draftbutton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Drafts')]")));
+        
+        //public IWebElement DraftMail => WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"));
+        public Button DraftMailbutton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]")));
 
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(10));
 
-        public IWebElement SendMail => WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Send']"));
+        //public IWebElement SendMail => WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Send']"));
+        public Button SendMailbutton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Send']")));
         public IWebElement checkSubject = (WebElement)WebDriver.GetInstance().FindElement(By.CssSelector("input[name=subjectbox]"));
         public IWebElement checkTextbox = (WebElement)WebDriver.GetInstance().FindElement(By.XPath("//div[@role='textbox']"));
 
         public void DraftMails()
         {
 
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DraftField));
-            var Draftbutton = new Button(DraftField);
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DraftField));
+            //var Draftbutton = new Button(DraftField);
             Draftbutton.Click();
             
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DraftMail));
-            var DraftMailbutton = new Button(DraftMail);
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(DraftMail));
+           // var DraftMailbutton = new Button(DraftMail);
             DraftMailbutton.Click();
            
             //SendMail.Click();
-            var SendMailbutton = new Button(SendMail);
+            //var SendMailbutton = new Button(SendMail);
             SendMailbutton.Click();
         }
 

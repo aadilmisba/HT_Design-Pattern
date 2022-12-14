@@ -18,15 +18,25 @@ namespace HT_Design_Pattern
     public class WebDriver
     {
         private static IWebDriver? webDriver;
+        public static readonly object InstanceLock=new object();
 
         public static IWebDriver GetInstance()
         {
-            if (webDriver == null)
+            if (webDriver==null) 
             {
-                var chromeOptions = new ChromeOptions();
-                chromeOptions.AddArgument("--start-maximized");
-                webDriver = new ChromeDriver(chromeOptions);
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                if (webDriver == null)
+                {
+                    lock (InstanceLock)
+                    {
+                        var chromeOptions = new ChromeOptions();
+                        chromeOptions.AddArgument("--start-maximized");
+                        webDriver = new ChromeDriver(chromeOptions);
+                        webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+                        return webDriver;
+                    }
+                }
+                
             }
             return webDriver;
         }
