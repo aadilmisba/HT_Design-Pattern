@@ -25,10 +25,16 @@ namespace HT_Design_Pattern.PageObjects
         //public IWebElement CommposeBoxField => WebDriver.GetInstance().FindElement(By.XPath("//div[@jscontroller='eIu7Db']"));
         public Button CommposeBox = new Button(WebDriver.GetInstance().FindElement(By.XPath("//div[@jscontroller='eIu7Db']")));
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(30));
-        public IWebElement SenderMailField => WebDriver.GetInstance().FindElement(By.CssSelector("input[role=combobox]"));
-        public IWebElement SubjectField => WebDriver.GetInstance().FindElement(By.Name("subjectbox"));
-        public IWebElement TextBoxField => WebDriver.GetInstance().FindElement(By.XPath("//div[@aria-label='Message Body']"));
-        public IWebElement SaveCloseField => WebDriver.GetInstance().FindElement(By.XPath("//img[@alt='Close']"));
+
+        //public IWebElement SenderMailField => WebDriver.GetInstance().FindElement(By.CssSelector("input[role=combobox]"));
+        public TextBox SenderMailField =new TextBox(WebDriver.GetInstance().FindElement(By.CssSelector("input[role=combobox]")));
+        //public IWebElement SubjectField => WebDriver.GetInstance().FindElement(By.Name("subjectbox"));
+        public TextBox SubjectField = new TextBox(WebDriver.GetInstance().FindElement(By.Name("subjectbox")));
+        //public IWebElement TextBoxField => WebDriver.GetInstance().FindElement(By.XPath("//div[@aria-label='Message Body']"));
+        public TextBox TextBoxField = new TextBox(WebDriver.GetInstance().FindElement(By.XPath("//div[@aria-label='Message Body']")));
+        
+        //public IWebElement SaveCloseField => WebDriver.GetInstance().FindElement(By.XPath("//img[@alt='Close']"));
+        public Button SaveCloseButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//img[@alt='Close']")));
 
 
         public void Compose(string senderMail, string subject, string textbox)
@@ -36,12 +42,11 @@ namespace HT_Design_Pattern.PageObjects
            // wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(CommposeBoxField));
            // CommposeBox = new Button(CommposeBoxField);
             CommposeBox.Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SenderMailField));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(WebDriver.GetInstance().FindElement(By.CssSelector("input[role=combobox]"))));
             SenderMailField.SendKeys(senderMail); 
             SubjectField.SendKeys(subject); 
             TextBoxField.SendKeys(textbox); 
 
-            var SaveCloseButton = new Button(SaveCloseField);
             SaveCloseButton.Click();
         }
 

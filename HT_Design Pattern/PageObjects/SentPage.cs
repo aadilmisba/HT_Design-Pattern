@@ -26,33 +26,33 @@ namespace HT_Design_Pattern.PageObjects
         //public IWebElement SentField => WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Sent')]"));
         public Button SentButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//a[contains(text(),'Sent')]")));
 
-        public IWebElement SentMail => WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"));
-
+        //public IWebElement SentMail => WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"));
+        public TextBox SentMail = new TextBox(WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]")));
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(50));
 
+        public Button SentMailButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]")));
         public Button AccountButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//img[@class='gb_Ia gbii']")));
         //public IWebElement AccountField => WebDriver.GetInstance().FindElement(By.XPath("//img[@class='gb_Ia gbii']"));
 
-        public IWebElement SignOut => WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Sign out']"));
-
+        public Button SignOutButton = new Button(WebDriver.GetInstance().FindElement(By.XPath("//div[text()='Sign out']")));
 
         public void SendMails()
         {
             //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentField));
             //var SentButton = new Button(SentField);
             SentButton.Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(SentMail));
-            var SentMailButton = new Button(SentMail);
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(WebDriver.GetInstance().FindElement(By.XPath("//div[@role='link']//span[contains(text(),'Testing Subject')]"))));
+           
             SentMailButton.Click();
         }
 
 
         public void LogOut()
         {
-            //var AccountButton = new Button(AccountField);
+            
             AccountButton.Click();
             WebDriver.GetInstance().SwitchTo().Frame("account");
-            var SignOutButton = new Button(SignOut);
+            
             SignOutButton.Click();
             WebDriver.GetInstance().SwitchTo().ParentFrame().Dispose();
 

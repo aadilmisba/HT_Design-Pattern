@@ -22,15 +22,16 @@ namespace HT_Design_Pattern.PageObjects
         {
         }
 
-        public IWebElement UsernameField => WebDriver.GetInstance().FindElement(By.Id("identifierId"));
+        //public IWebElement UsernameField => WebDriver.GetInstance().FindElement(By.Id("identifierId"));
+        public TextBox UsernameField = new TextBox(WebDriver.GetInstance().FindElement(By.Id("identifierId")));
+
         public Button UsernameButton = new Button(WebDriver.GetInstance().FindElement(By.Id("identifierNext")));
         public Button PasswordButton = new Button(WebDriver.GetInstance().FindElement(By.Id("passwordNext")));
-        //public IWebElement NextButton => WebDriver.GetInstance().FindElement(By.Id("identifierNext"));
-        public IWebElement PasswordField => WebDriver.GetInstance().FindElement(By.XPath("//*[@id='password']//input"));
+
+        //public IWebElement PasswordField => WebDriver.GetInstance().FindElement(By.XPath("//*[@id='password']//input"));
+        public TextBox PasswordField = new TextBox(WebDriver.GetInstance().FindElement(By.XPath("//*[@id='password']//input")));
 
         public WebDriverWait wait = new WebDriverWait(WebDriver.GetInstance(), TimeSpan.FromSeconds(50));
-        
-        //public IWebElement LoginButton => WebDriver.GetInstance().FindElement(By.Id("passwordNext"));
 
         public IWebElement MainPage => WebDriver.GetInstance().FindElement(By.CssSelector("body"));
 
@@ -42,7 +43,7 @@ namespace HT_Design_Pattern.PageObjects
             
             //var UsernameButton = new Button(NextButton);
             UsernameButton.Click();
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(PasswordField));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(WebDriver.GetInstance().FindElement(By.XPath("//*[@id='password']//input"))));
             //pass this value from test
             PasswordField.SendKeys(password); 
 
